@@ -29,6 +29,10 @@ out costs a teammate seconds rather than minutes.
 - **Strategic states tab:** priority states with a short posture summary, key accounts, and contacts.
 - **Q3 opportunities tab:** open deals closing during the leave window, flagged so coverage
   knows what can't wait.
+- **Emailed-contacts layer:** a Gmail sweep surfaces everyone the rep has corresponded with.
+  Known contacts fold into their account card (tagged ✉); people at agencies not yet in the CRM
+  become searchable "emailed contact" cards and a browsable tab — so *anyone the rep has emailed
+  is findable*, even before the CRM catches up.
 
 ## How it works
 

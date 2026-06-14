@@ -2,6 +2,8 @@
 build/raw/
 build/strategic-states.json
 public/data.json
+gmail-sweep-plan.csv
+email_sweep.json
 
 # OS / tooling
 .DS_Store

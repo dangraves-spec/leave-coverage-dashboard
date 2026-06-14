@@ -46,6 +46,7 @@ for (const c of contacts) {
     title: c.Title || "",
     email: c.Email || "",
     phone: c.Phone || "",
+    source: "crm",
   });
 }
 const oppsByAcct = new Map();
@@ -121,6 +122,60 @@ const built = accounts.map((a) => {
   };
 });
 
+// ---- merge Gmail-sweep contacts (people Dan has emailed) ----
+// Mapped contacts fold into their account card (tagged source:"email"); the rest
+// become loose "emailed" people, findable by search and in the Emailed tab.
+let sweep = [];
+try {
+  sweep = JSON.parse(readFileSync(join(RAW, "email_sweep.json"), "utf8"));
+} catch {}
+const acctById = new Map(built.map((a) => [a.id, a]));
+const crmEmailSet = new Set(contacts.map((c) => (c.Email || "").toLowerCase()).filter(Boolean));
+const emailedContacts = [];
+const personIndex = {};
+const seenLoose = new Set();
+let emailMapped = 0;
+for (const s of sweep) {
+  if (s.classification === "SKIP") continue;
+  const email = (s.email || "").toLowerCase();
+  if (!email) continue;
+  const acct = s.accountId ? acctById.get(s.accountId) : null;
+  if (acct) {
+    if (!acct.contacts.some((c) => (c.email || "").toLowerCase() === email)) {
+      acct.contacts.push({
+        name: s.name || email.split("@")[0],
+        title: s.title || "",
+        email,
+        phone: "",
+        source: "email",
+        lastDate: s.lastDate || "",
+      });
+      emailMapped++;
+    }
+    if (!emailIndex[email]) emailIndex[email] = acct.id;
+    addDomain(cleanDomain(email.split("@")[1]), acct.id);
+  } else {
+    if (seenLoose.has(email) || crmEmailSet.has(email)) continue;
+    seenLoose.add(email);
+    emailedContacts.push({
+      name: s.name || email.split("@")[0],
+      title: s.title || "",
+      email,
+      organization: s.organization || "",
+      domain: s.domain || cleanDomain(email.split("@")[1]),
+      lastDate: s.lastDate || "",
+      note: s.notes || "",
+    });
+  }
+}
+emailedContacts.sort(
+  (a, b) => (a.organization || "zzz").localeCompare(b.organization || "zzz") || a.name.localeCompare(b.name)
+);
+// Build the email->position index AFTER sorting so lookups land on the right person.
+emailedContacts.forEach((p, i) => {
+  personIndex[p.email] = i;
+});
+
 const byName = (x, y) => x.name.localeCompare(y.name);
 const customers = built.filter((a) => a.isCustomer).sort(byName);
 
@@ -138,12 +193,16 @@ const data = {
     openOpps: openOpps.length,
     q3Opps: q3Opps.length,
     leaveWindowOpps: q3Opps.filter((o) => o.closesDuringLeave).length,
+    emailContactsMapped: emailMapped,
+    emailedContactsLoose: emailedContacts.length,
   },
   accounts: built.sort(byName),
   customers: customers.map((c) => c.id),
   strategicStates,
   q3Opps,
+  emailedContacts,
   emailIndex,
+  personIndex,
   domainIndex,
 };
 
@@ -153,5 +212,6 @@ console.log(
     `  accounts: ${data.counts.accounts}\n` +
     `  customers: ${data.counts.customers}\n` +
     `  open opps: ${data.counts.openOpps}  (Q3: ${data.counts.q3Opps}, during leave: ${data.counts.leaveWindowOpps})\n` +
+    `  emailed contacts: ${emailMapped} folded into accounts, ${emailedContacts.length} loose (no CRM account)\n` +
     `  email index: ${Object.keys(emailIndex).length}  domains: ${Object.keys(domainIndex).length}`
 );

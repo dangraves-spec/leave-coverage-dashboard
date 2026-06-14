@@ -3,7 +3,7 @@
   "leaveWindow": { "start": "2026-07-01", "end": "2026-08-31", "label": "July–August 2026" },
   "escalation": { "name": "", "email": "" },
   "_note": "SYNTHETIC SAMPLE DATA — all agencies, people, UUIDs, and deals below are fictional. The real dashboard is generated from Salesforce by build/generate-data.mjs and is never committed.",
-  "counts": { "accounts": 6, "customers": 3, "openOpps": 5, "q3Opps": 3, "leaveWindowOpps": 2 },
+  "counts": { "accounts": 6, "customers": 3, "openOpps": 5, "q3Opps": 3, "leaveWindowOpps": 2, "emailContactsMapped": 1, "emailedContactsLoose": 2 },
   "accounts": [
     {
       "id": "001SAMPLE0000000001",
@@ -18,8 +18,9 @@
       "domain": "springfield.example.gov",
       "orgs": [{ "uuid": "11111111-1111-4111-8111-111111111111", "name": "City of Springfield" }],
       "contacts": [
-        { "name": "Jane Doe", "title": "Chief Information Officer", "email": "jane.doe@springfield.example.gov", "phone": "555-0100" },
-        { "name": "Sam Rivera", "title": "Director of Innovation", "email": "sam.rivera@springfield.example.gov", "phone": "" }
+        { "name": "Jane Doe", "title": "Chief Information Officer", "email": "jane.doe@springfield.example.gov", "phone": "555-0100", "source": "crm" },
+        { "name": "Sam Rivera", "title": "Director of Innovation", "email": "sam.rivera@springfield.example.gov", "phone": "", "source": "crm" },
+        { "name": "Lee Carter", "title": "Procurement Analyst", "email": "lee.carter@springfield.example.gov", "phone": "", "source": "email", "lastDate": "2026-05-21" }
       ],
       "openOpps": [
         { "name": "Springfield | Claude Code Expansion", "amount": 48000, "stage": "Stage 3: Validate", "closeDate": "2026-07-22", "type": "C4W", "nextStep": "Confirm seat count with CIO; route order form.", "forecast": "Best Case", "closesDuringLeave": true }
@@ -164,5 +165,13 @@
     "metrowater.example.org": ["001SAMPLE0000000004"],
     "capitalcity.example.gov": ["001SAMPLE0000000005"],
     "riverside.example.k12.us": ["001SAMPLE0000000006"]
+  },
+  "emailedContacts": [
+    { "name": "Dana Brooks", "title": "Grants Administrator", "email": "dana.brooks@exampleagency.example.gov", "organization": "Example State Agency for Workforce", "domain": "exampleagency.example.gov", "lastDate": "2026-05-30", "note": "Emailed re: workforce pilot; no CRM account in portfolio." },
+    { "name": "Pat Nguyen", "title": "IT Procurement Lead", "email": "pnguyen@examplecog.example.us", "organization": "Example Council of Governments", "domain": "examplecog.example.us", "lastDate": "2026-04-18", "note": "" }
+  ],
+  "personIndex": {
+    "dana.brooks@exampleagency.example.gov": 0,
+    "pnguyen@examplecog.example.us": 1
   }
 }
