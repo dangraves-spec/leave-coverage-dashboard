@@ -1,0 +1,9 @@
+# Real account data — NEVER commit (internal SFDC / customer PII)
+build/raw/
+build/strategic-states.json
+public/data.json
+
+# OS / tooling
+.DS_Store
+node_modules/
+*.log

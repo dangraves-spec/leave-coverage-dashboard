@@ -1,0 +1,168 @@
+{
+  "generatedAt": "2026-06-14",
+  "leaveWindow": { "start": "2026-07-01", "end": "2026-08-31", "label": "July–August 2026" },
+  "escalation": { "name": "", "email": "" },
+  "_note": "SYNTHETIC SAMPLE DATA — all agencies, people, UUIDs, and deals below are fictional. The real dashboard is generated from Salesforce by build/generate-data.mjs and is never committed.",
+  "counts": { "accounts": 6, "customers": 3, "openOpps": 5, "q3Opps": 3, "leaveWindowOpps": 2 },
+  "accounts": [
+    {
+      "id": "001SAMPLE0000000001",
+      "name": "City of Springfield",
+      "status": "Customer",
+      "isCustomer": true,
+      "customerSignals": ["Has Anthropic org", "Closed-won opp"],
+      "sfdcType": null,
+      "state": "IL",
+      "sector": "Public Administration",
+      "website": "https://springfield.example.gov",
+      "domain": "springfield.example.gov",
+      "orgs": [{ "uuid": "11111111-1111-4111-8111-111111111111", "name": "City of Springfield" }],
+      "contacts": [
+        { "name": "Jane Doe", "title": "Chief Information Officer", "email": "jane.doe@springfield.example.gov", "phone": "555-0100" },
+        { "name": "Sam Rivera", "title": "Director of Innovation", "email": "sam.rivera@springfield.example.gov", "phone": "" }
+      ],
+      "openOpps": [
+        { "name": "Springfield | Claude Code Expansion", "amount": 48000, "stage": "Stage 3: Validate", "closeDate": "2026-07-22", "type": "C4W", "nextStep": "Confirm seat count with CIO; route order form.", "forecast": "Best Case", "closesDuringLeave": true }
+      ]
+    },
+    {
+      "id": "001SAMPLE0000000002",
+      "name": "State of Anystate Department of Technology",
+      "status": "Customer",
+      "isCustomer": true,
+      "customerSignals": ["Has Anthropic org"],
+      "sfdcType": "Customer",
+      "state": "AS",
+      "sector": "Public Administration",
+      "website": "https://tech.anystate.example.gov",
+      "domain": "tech.anystate.example.gov",
+      "orgs": [
+        { "uuid": "22222222-2222-4222-8222-222222222222", "name": "Anystate DOT — Enterprise" },
+        { "uuid": "33333333-3333-4333-8333-333333333333", "name": "Anystate DOT — Pilot" }
+      ],
+      "contacts": [
+        { "name": "Alex Chen", "title": "State CTO", "email": "alex.chen@anystate.example.gov", "phone": "555-0142" }
+      ],
+      "openOpps": [
+        { "name": "Anystate | Enterprise Add-On", "amount": 250000, "stage": "Stage 4: Negotiate", "closeDate": "2026-09-15", "type": "C4W", "nextStep": "Carahsoft quote in legal review.", "forecast": "Most Likely", "closesDuringLeave": false }
+      ]
+    },
+    {
+      "id": "001SAMPLE0000000003",
+      "name": "Example County Government",
+      "status": "Customer",
+      "isCustomer": true,
+      "customerSignals": ["Closed-won opp"],
+      "sfdcType": null,
+      "state": "TX",
+      "sector": "Public Administration",
+      "website": "https://examplecounty.example.gov",
+      "domain": "examplecounty.example.gov",
+      "orgs": [],
+      "contacts": [
+        { "name": "Morgan Lee", "title": "Deputy CIO", "email": "morgan.lee@examplecounty.example.gov", "phone": "" }
+      ],
+      "openOpps": []
+    },
+    {
+      "id": "001SAMPLE0000000004",
+      "name": "Metro Water District",
+      "status": "Prospect",
+      "isCustomer": false,
+      "customerSignals": [],
+      "sfdcType": "Prospect",
+      "state": "CA",
+      "sector": "Utilities",
+      "website": "https://metrowater.example.org",
+      "domain": "metrowater.example.org",
+      "orgs": [],
+      "contacts": [
+        { "name": "Priya Nair", "title": "IT Manager", "email": "priya.nair@metrowater.example.org", "phone": "555-0188" }
+      ],
+      "openOpps": [
+        { "name": "Metro Water | Initial Pilot", "amount": 12000, "stage": "Stage 1: Discover", "closeDate": "2026-08-05", "type": "C4W", "nextStep": "Schedule discovery with IT manager.", "forecast": "Pipeline", "closesDuringLeave": true }
+      ]
+    },
+    {
+      "id": "001SAMPLE0000000005",
+      "name": "Capital City",
+      "status": "Prospect",
+      "isCustomer": false,
+      "customerSignals": [],
+      "sfdcType": null,
+      "state": "NC",
+      "sector": "Public Administration",
+      "website": "https://capitalcity.example.gov",
+      "domain": "capitalcity.example.gov",
+      "orgs": [],
+      "contacts": [
+        { "name": "Chris Patel", "title": "Chief Data Officer", "email": "chris.patel@capitalcity.example.gov", "phone": "" }
+      ],
+      "openOpps": [
+        { "name": "Capital City | Unmanaged Spend Review", "amount": null, "stage": "Stage 0: Prospect", "closeDate": "2026-09-30", "type": "C4W", "nextStep": "Review spend trend; identify buyer.", "forecast": "Omitted", "closesDuringLeave": false }
+      ]
+    },
+    {
+      "id": "001SAMPLE0000000006",
+      "name": "Riverside Independent School District",
+      "status": "Prospect",
+      "isCustomer": false,
+      "customerSignals": [],
+      "sfdcType": "Prospect",
+      "state": "GA",
+      "sector": "Educational Services",
+      "website": "https://riverside.example.k12.us",
+      "domain": "riverside.example.k12.us",
+      "orgs": [],
+      "contacts": [],
+      "openOpps": [
+        { "name": "Riverside ISD | Teacher Productivity Pilot", "amount": 9000, "stage": "Stage 1: Discover", "closeDate": "2026-10-10", "type": "C4W", "nextStep": "Awaiting AI-use policy sign-off.", "forecast": "Pipeline", "closesDuringLeave": false }
+      ]
+    }
+  ],
+  "customers": ["001SAMPLE0000000001", "001SAMPLE0000000002", "001SAMPLE0000000003"],
+  "strategicStates": [
+    {
+      "code": "AS",
+      "name": "Anystate",
+      "summary": "Anchored by the Department of Technology (live customer, enterprise add-on in negotiation). Strong central-IT relationship driving an agency-by-agency rollout.",
+      "keyAccounts": [
+        "Anystate Department of Technology — live customer; $250K enterprise add-on (Most Likely, 9/15)",
+        "Anystate Health Agency — early discovery"
+      ],
+      "contacts": ["Alex Chen — State CTO"]
+    },
+    {
+      "code": "EX",
+      "name": "Example State",
+      "summary": "Mix of municipal and county momentum. Springfield is a live Claude Code customer expanding; Example County has a closed-won foothold to grow.",
+      "keyAccounts": [
+        "City of Springfield — live; Claude Code expansion (Best Case, 7/22)",
+        "Example County Government — closed-won; expansion TBD"
+      ],
+      "contacts": ["Jane Doe — Springfield CIO"]
+    }
+  ],
+  "q3Opps": [
+    { "name": "Springfield | Claude Code Expansion", "account": "City of Springfield", "accountId": "001SAMPLE0000000001", "amount": 48000, "stage": "Stage 3: Validate", "closeDate": "2026-07-22", "type": "C4W", "nextStep": "Confirm seat count with CIO; route order form.", "forecast": "Best Case", "closesDuringLeave": true },
+    { "name": "Metro Water | Initial Pilot", "account": "Metro Water District", "accountId": "001SAMPLE0000000004", "amount": 12000, "stage": "Stage 1: Discover", "closeDate": "2026-08-05", "type": "C4W", "nextStep": "Schedule discovery with IT manager.", "forecast": "Pipeline", "closesDuringLeave": true },
+    { "name": "Anystate | Enterprise Add-On", "account": "State of Anystate Department of Technology", "accountId": "001SAMPLE0000000002", "amount": 250000, "stage": "Stage 4: Negotiate", "closeDate": "2026-09-15", "type": "C4W", "nextStep": "Carahsoft quote in legal review.", "forecast": "Most Likely", "closesDuringLeave": false }
+  ],
+  "emailIndex": {
+    "jane.doe@springfield.example.gov": "001SAMPLE0000000001",
+    "sam.rivera@springfield.example.gov": "001SAMPLE0000000001",
+    "alex.chen@anystate.example.gov": "001SAMPLE0000000002",
+    "morgan.lee@examplecounty.example.gov": "001SAMPLE0000000003",
+    "priya.nair@metrowater.example.org": "001SAMPLE0000000004",
+    "chris.patel@capitalcity.example.gov": "001SAMPLE0000000005"
+  },
+  "domainIndex": {
+    "springfield.example.gov": ["001SAMPLE0000000001"],
+    "tech.anystate.example.gov": ["001SAMPLE0000000002"],
+    "anystate.example.gov": ["001SAMPLE0000000002"],
+    "examplecounty.example.gov": ["001SAMPLE0000000003"],
+    "metrowater.example.org": ["001SAMPLE0000000004"],
+    "capitalcity.example.gov": ["001SAMPLE0000000005"],
+    "riverside.example.k12.us": ["001SAMPLE0000000006"]
+  }
+}

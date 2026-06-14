@@ -1,0 +1,22 @@
+[
+  {
+    "code": "AS",
+    "name": "Anystate",
+    "summary": "Anchored by the Department of Technology (live customer, enterprise add-on in negotiation). Strong central-IT relationship driving an agency-by-agency rollout.",
+    "keyAccounts": [
+      "Anystate Department of Technology — live customer; $250K enterprise add-on (Most Likely, 9/15)",
+      "Anystate Health Agency — early discovery"
+    ],
+    "contacts": ["Alex Chen — State CTO"]
+  },
+  {
+    "code": "EX",
+    "name": "Example State",
+    "summary": "Mix of municipal and county momentum. Springfield is a live Claude Code customer expanding; Example County has a closed-won foothold to grow.",
+    "keyAccounts": [
+      "City of Springfield — live; Claude Code expansion (Best Case, 7/22)",
+      "Example County Government — closed-won; expansion TBD"
+    ],
+    "contacts": ["Jane Doe — Springfield CIO"]
+  }
+]

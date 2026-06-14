@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dan's Survival Guide</title>
+    <style>
+      :root {
+        --ink: #191919;
+        --paper: #f4f2ec;
+        --card: #ffffff;
+        --forest: #4a7c59;
+        --terra: #cc6a4a;
+        --rose: #8b6969;
+        --slate: #5a7fa0;
+        --line: #e3dfd4;
+        --muted: #6b6655;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; }
+      a { color: var(--slate); }
+      .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px 64px; }
+      header {
+        background: var(--ink);
+        color: var(--paper);
+        padding: 22px 0 26px;
+      }
+      header .wrap { padding-bottom: 0; }
+      header h1 { margin: 0 0 4px; font-size: 26px; color: #fff; }
+      header .sub { color: #cfc9ba; font-size: 14px; margin-bottom: 18px; }
+      header .meta { color: #9c968a; font-size: 12.5px; margin-top: 14px; }
+      header .meta b { color: #e7e2d6; font-weight: 600; }
+      .search {
+        width: 100%; padding: 14px 16px; font-size: 16px; border: none; border-radius: 10px;
+        background: #fff; color: var(--ink); box-shadow: 0 2px 0 rgba(0,0,0,.15);
+      }
+      .search:focus { outline: 2px solid var(--terra); }
+      .hint { color: #9c968a; font-size: 12.5px; margin: 8px 2px 0; }
+
+      .tabs { display: flex; gap: 6px; margin: 22px 0 18px; flex-wrap: wrap; }
+      .tab {
+        border: 1px solid var(--line); background: #fff; color: var(--muted);
+        padding: 8px 16px; border-radius: 999px; cursor: pointer; font-size: 14px;
+      }
+      .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+      .tab .n { opacity: .6; margin-left: 6px; font-size: 12px; }
+
+      .card {
+        background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+        padding: 16px 18px; margin-bottom: 14px;
+      }
+      .card.cust { border-left: 4px solid var(--forest); }
+      .card.prospect { border-left: 4px solid var(--terra); }
+      .card h3 { margin: 0; font-size: 18px; }
+      .row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+      .pill {
+        font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+        padding: 3px 9px; border-radius: 999px; white-space: nowrap;
+      }
+      .pill.cust { background: #e4efe7; color: var(--forest); }
+      .pill.prospect { background: #f6e6df; color: var(--terra); }
+      .sub { color: var(--muted); font-size: 13px; margin-top: 2px; }
+      .signals { font-size: 11.5px; color: var(--muted); margin-top: 6px; }
+      .signals span { background: #f0ede4; border-radius: 5px; padding: 2px 7px; margin-right: 5px; display:inline-block; }
+
+      .block { margin-top: 14px; }
+      .block .label {
+        font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+        color: var(--muted); margin-bottom: 6px;
+      }
+      .uuid {
+        display: inline-flex; align-items: center; gap: 8px; background: #f0ede4;
+        border-radius: 7px; padding: 5px 10px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+        font-size: 12.5px; margin: 0 6px 6px 0;
+      }
+      .uuid .nm { color: var(--muted); font-family: inherit; font-size: 11.5px; }
+      .copy { border: none; background: var(--slate); color: #fff; border-radius: 5px; cursor: pointer; font-size: 11px; padding: 2px 7px; }
+      .copy.ok { background: var(--forest); }
+
+      table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+      th { text-align: left; color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; padding: 4px 8px; border-bottom: 1px solid var(--line); }
+      td { padding: 7px 8px; border-bottom: 1px solid #f0ede4; vertical-align: top; }
+      tr.leave td { background: #fbeee9; }
+      .flag { color: var(--terra); font-weight: 700; font-size: 11px; }
+      .ns { color: var(--muted); font-size: 12px; }
+
+      .people { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+      .person { font-size: 13px; }
+      .person .t { color: var(--muted); font-size: 12px; }
+      .empty { color: var(--muted); font-style: italic; font-size: 13px; }
+      details summary { cursor: pointer; color: var(--slate); font-size: 13px; margin-top: 4px; }
+      .statecard h3 { color: var(--forest); }
+      .statecard ul { margin: 8px 0 0; padding-left: 18px; }
+      .statecard li { margin-bottom: 5px; font-size: 13.5px; }
+      .keytag { font-size: 12px; color: var(--muted); margin-top: 8px; }
+      @media (max-width: 620px) { .people { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <h1>Dan's Survival Guide</h1>
+        <div class="sub">Covering one of Dan's accounts while he's out? Paste the sender's email or domain to get instant context.</div>
+        <input id="q" class="search" placeholder="Paste an email (jane@agency.gov), a domain, or type an agency name…" autocomplete="off" />
+        <div class="hint" id="hint"></div>
+        <div class="meta" id="meta"></div>
+      </div>
+    </header>
+    <div class="wrap">
+      <div class="tabs" id="tabs"></div>
+      <div id="view"></div>
+    </div>
+
+    <script>
+      const $ = (s) => document.querySelector(s);
+      let DATA = null;
+      let tab = "customers";
+
+      const esc = (s) => (s == null ? "" : String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])));
+      const money = (n) => (n == null ? "—" : "$" + Number(n).toLocaleString());
+      const acctById = (id) => DATA.accounts.find((a) => a.id === id);
+
+      function uuidHtml(orgs) {
+        if (!orgs.length) return '<div class="empty">No org UUID on file.</div>';
+        return orgs
+          .map(
+            (o, i) =>
+              `<span class="uuid"><code>${esc(o.uuid)}</code>` +
+              (o.name ? `<span class="nm">${esc(o.name)}</span>` : "") +
+              `<button class="copy" data-uuid="${esc(o.uuid)}">copy</button></span>`
+          )
+          .join("");
+      }
+
+      function oppsTable(opps) {
+        if (!opps.length) return '<div class="empty">No open opportunities.</div>';
+        const rows = opps
+          .map((o) => {
+            const leave = o.closesDuringLeave ? ' class="leave"' : "";
+            const flag = o.closesDuringLeave ? '<span class="flag">⚑ closes during leave</span> ' : "";
+            return (
+              `<tr${leave}><td>${esc(o.name)}${o.nextStep ? `<div class="ns">${esc(o.nextStep)}</div>` : ""}</td>` +
+              `<td>${money(o.amount)}</td><td>${esc(o.stage)}</td>` +
+              `<td>${flag}${esc(o.closeDate || "—")}</td></tr>`
+            );
+          })
+          .join("");
+        return `<table><thead><tr><th>Opportunity</th><th>Amount</th><th>Stage</th><th>Close</th></tr></thead><tbody>${rows}</tbody></table>`;
+      }
+
+      function peopleHtml(contacts) {
+        if (!contacts.length) return '<div class="empty">No contacts on file.</div>';
+        return (
+          '<div class="people">' +
+          contacts
+            .map(
+              (c) =>
+                `<div class="person"><b>${esc(c.name) || "—"}</b>` +
+                (c.title ? `<div class="t">${esc(c.title)}</div>` : "") +
+                (c.email ? `<div><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></div>` : "") +
+                (c.phone ? `<div class="t">${esc(c.phone)}</div>` : "") +
+                `</div>`
+            )
+            .join("") +
+          "</div>"
+        );
+      }
+
+      function accountCard(a, highlightEmail) {
+        const cls = a.isCustomer ? "cust" : "prospect";
+        const pill = a.isCustomer ? '<span class="pill cust">Customer</span>' : '<span class="pill prospect">Prospect</span>';
+        let contacts = a.contacts;
+        if (highlightEmail) {
+          contacts = [...a.contacts].sort((x, y) => (y.email.toLowerCase() === highlightEmail) - (x.email.toLowerCase() === highlightEmail));
+        }
+        return (
+          `<div class="card ${cls}">` +
+          `<div class="row"><h3>${esc(a.name)}</h3>${pill}</div>` +
+          `<div class="sub">${esc(a.state || "—")}${a.website ? " · " + esc(a.domain) : ""}${a.sector ? " · " + esc(a.sector) : ""}</div>` +
+          (a.isCustomer ? `<div class="signals">${a.customerSignals.map((s) => `<span>${esc(s)}</span>`).join("")}</div>` : "") +
+          (a.isCustomer ? `<div class="block"><div class="label">Anthropic Org UUID</div>${uuidHtml(a.orgs)}</div>` : "") +
+          `<div class="block"><div class="label">Open Opportunities (${a.openOpps.length})</div>${oppsTable(a.openOpps)}</div>` +
+          `<div class="block"><div class="label">Key Contacts (${a.contacts.length})</div>${peopleHtml(contacts)}</div>` +
+          `</div>`
+        );
+      }
+
+      // ---- search ----
+      function cleanDomain(s) {
+        return (s || "").toLowerCase().replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0].trim();
+      }
+      function search(qRaw) {
+        const q = qRaw.trim().toLowerCase();
+        if (!q) return null;
+        // exact email
+        if (DATA.emailIndex[q]) return { ids: [DATA.emailIndex[q]], email: q };
+        // domain (from a pasted email or a bare domain)
+        const dom = q.includes("@") ? cleanDomain(q.split("@")[1]) : cleanDomain(q);
+        if (dom && DATA.domainIndex[dom]) return { ids: DATA.domainIndex[dom], email: q.includes("@") ? q : null };
+        // fuzzy: name / domain / org / contact
+        const ids = DATA.accounts
+          .filter(
+            (a) =>
+              a.name.toLowerCase().includes(q) ||
+              a.domain.includes(q) ||
+              a.orgs.some((o) => (o.name || "").toLowerCase().includes(q)) ||
+              a.contacts.some((c) => c.name.toLowerCase().includes(q) || c.email.toLowerCase().includes(q))
+          )
+          .map((a) => a.id);
+        return { ids, email: null };
+      }
+
+      function renderSearch(res, q) {
+        const view = $("#view");
+        if (!res.ids.length) {
+          view.innerHTML = `<div class="card"><div class="empty">No match for “${esc(q)}”. Try the agency name, or browse the tabs below.</div></div>`;
+          return;
+        }
+        const head = `<div class="hint" style="margin:0 0 12px">${res.ids.length} match${res.ids.length > 1 ? "es" : ""} for “${esc(q)}”</div>`;
+        view.innerHTML = head + res.ids.map((id) => accountCard(acctById(id), res.email)).join("");
+        wireCopy();
+      }
+
+      // ---- tabs ----
+      function renderTabs() {
+        const c = DATA.counts;
+        const defs = [
+          ["customers", "Customers", c.customers],
+          ["states", "Strategic States", DATA.strategicStates.length],
+          ["q3", "Q3 Opps", c.q3Opps],
+        ];
+        $("#tabs").innerHTML = defs
+          .map(([k, label, n]) => `<button class="tab ${k === tab ? "active" : ""}" data-tab="${k}">${label}<span class="n">${n}</span></button>`)
+          .join("");
+        $("#tabs").querySelectorAll(".tab").forEach((b) => (b.onclick = () => { tab = b.dataset.tab; renderTabs(); renderTab(); }));
+      }
+
+      function renderTab() {
+        const view = $("#view");
+        if (tab === "customers") {
+          const custs = DATA.customers.map(acctById).filter(Boolean);
+          view.innerHTML =
+            `<div class="hint" style="margin:0 0 12px">${custs.length} current customers (any account with an Anthropic org, a closed-won deal, or marked Customer in SFDC).</div>` +
+            custs.map((a) => accountCard(a)).join("");
+          wireCopy();
+        } else if (tab === "states") {
+          view.innerHTML = DATA.strategicStates
+            .map(
+              (s) =>
+                `<div class="card statecard"><div class="row"><h3>${esc(s.name)} (${esc(s.code)})</h3></div>` +
+                `<div class="sub">${esc(s.summary)}</div>` +
+                (s.keyAccounts && s.keyAccounts.length ? `<div class="block"><div class="label">Key Accounts</div><ul>${s.keyAccounts.map((k) => `<li>${esc(k)}</li>`).join("")}</ul></div>` : "") +
+                (s.contacts && s.contacts.length ? `<div class="keytag"><b>Contacts:</b> ${s.contacts.map(esc).join(" · ")}</div>` : "") +
+                `</div>`
+            )
+            .join("");
+        } else if (tab === "q3") {
+          const ds = DATA.q3Opps;
+          const rows = ds
+            .map((o) => {
+              const leave = o.closesDuringLeave ? ' class="leave"' : "";
+              const flag = o.closesDuringLeave ? '<span class="flag">⚑</span> ' : "";
+              return (
+                `<tr${leave}><td>${flag}${esc(o.closeDate)}</td><td>${esc(o.account)}</td>` +
+                `<td>${esc(o.name)}${o.nextStep ? `<div class="ns">${esc(o.nextStep)}</div>` : ""}</td>` +
+                `<td>${money(o.amount)}</td><td>${esc(o.stage)}</td><td>${esc(o.forecast || "—")}</td></tr>`
+              );
+            })
+            .join("");
+          view.innerHTML =
+            `<div class="hint" style="margin:0 0 12px">${ds.length} open opps closing in Q3 (Jul–Sep 2026). ⚑ = closes during Dan's leave (${esc(DATA.leaveWindow.label)}).</div>` +
+            `<div class="card"><table><thead><tr><th>Close</th><th>Account</th><th>Opportunity</th><th>Amount</th><th>Stage</th><th>Forecast</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+        }
+      }
+
+      function wireCopy() {
+        document.querySelectorAll(".copy").forEach((b) => {
+          b.onclick = () => {
+            navigator.clipboard.writeText(b.dataset.uuid);
+            b.textContent = "copied"; b.classList.add("ok");
+            setTimeout(() => { b.textContent = "copy"; b.classList.remove("ok"); }, 1200);
+          };
+        });
+      }
+
+      function init() {
+        const m = DATA.escalation && DATA.escalation.name
+          ? ` · <b>Escalate urgent items to:</b> ${esc(DATA.escalation.name)}${DATA.escalation.email ? " (" + esc(DATA.escalation.email) + ")" : ""}`
+          : "";
+        $("#meta").innerHTML = `<b>${DATA.counts.customers}</b> customers · <b>${DATA.counts.accounts}</b> accounts · <b>${DATA.counts.leaveWindowOpps}</b> opps close during leave · Snapshot <b>${esc(DATA.generatedAt)}</b>${m}`;
+        renderTabs();
+        renderTab();
+        const q = $("#q");
+        q.addEventListener("input", () => {
+          const v = q.value;
+          if (!v.trim()) { $("#tabs").style.display = "flex"; renderTab(); return; }
+          $("#tabs").style.display = "none";
+          renderSearch(search(v), v);
+        });
+      }
+
+      // Load the real snapshot if present; otherwise fall back to the committed
+      // synthetic sample (so the repo runs out-of-the-box for anyone who clones it).
+      const loadData = async () => {
+        for (const f of ["./data.json", "./data.sample.json"]) {
+          try {
+            const r = await fetch(f);
+            if (r.ok) return r.json();
+          } catch (e) {}
+        }
+        throw new Error("no data.json or data.sample.json found");
+      };
+      loadData()
+        .then((d) => { DATA = d; init(); })
+        .catch((e) => { $("#view").innerHTML = '<div class="card"><div class="empty">Could not load data — ' + esc(e.message) + "</div></div>"; });
+    </script>
+  </body>
+</html>
